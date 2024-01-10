@@ -1,6 +1,10 @@
 import { useLocalStorage } from "@vueuse/core";
 import { createApp } from "vue";
-
+import Vue3ColorPicker from "vue3-colorpicker";
+import Vue3Toasity, { toast, type ToastContainerOptions } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
+import "vue3-colorpicker/style.css";
+import "~/assets/css/font.css";
 // Vue Router
 import { createPinia } from "pinia";
 import { createI18n } from "vue-i18n";
@@ -17,11 +21,23 @@ import "~/styles/main.css";
 import "uno.css";
 
 const app = createApp(App);
-app.use(createI18n({
-  legacy: false,
-  locale: unref(useLocalStorage("locale", "zh")),
-  messages,
-}));
+app.use(
+  createI18n({
+    legacy: false,
+    locale: unref(useLocalStorage("locale", "zh")),
+    messages,
+  })
+);
+app.use(Vue3Toasity, {
+  autoClose: 2500,
+  theme: "dark", // 主题
+  hideProgressBar: false, // 隐藏timer进度条 开着有助于颜色高亮提示
+  dangerouslyHTMLString: true,
+  pauseOnFocusLoss: false, // 鼠标移入后暂停timer
+  transition: toast.TRANSITIONS.BOUNCE, // 动画效果 BOUNCE 为默认
+} as ToastContainerOptions);
+``;
+app.use(Vue3ColorPicker);
 app.use(createPinia());
 registerStore();
 app.use(router);

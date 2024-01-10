@@ -7,8 +7,11 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    ColorPickerModal: typeof import('./../src/components/ColorPickerModal/index.vue')['default']
+    PresetListModal: typeof import('./../src/components/PresetListModal/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    TextPicker: typeof import('./../src/components/TextPicker/index.vue')['default']
     UnoCSSIconButton: typeof import('./../src/components/Icon/UnoCSSIconButton.vue')['default']
     ZButton: typeof import('./../src/components/ZButton/index.vue')['default']
     ZModal: typeof import('./../src/components/ZModal/index.vue')['default']

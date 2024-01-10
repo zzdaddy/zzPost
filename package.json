@@ -1,10 +1,10 @@
 {
-  "name": "pixeled-pic-pro",
+  "name": "zz-post",
   "type": "module",
-  "version": "0.11.1",
+  "version": "0.0.1",
   "private": true,
   "packageManager": "pnpm@8.11.0",
-  "description": "a funny pixeled picture process website",
+  "description": "post your text",
   "keywords": [],
   "main": "src/main.ts",
   "scripts": {
@@ -25,18 +25,23 @@
   "dependencies": {
     "@kirklin/logger": "^0.0.2",
     "@kirklin/reset-css": "^0.0.3",
+    "@leafer-in/editor": "1.0.0-rc.9",
+    "@leafer-in/html": "1.0.0-rc.9",
     "@leafer-ui/interface": "1.0.0-rc.8",
     "@vueuse/core": "^10.7.0",
     "axios": "^1.6.2",
     "daisyui": "^3.9.4",
     "iso-639-1": "^3.1.0",
+    "js-md5": "^0.8.3",
     "konva": "^9.2.3",
     "leafer-ui": "1.0.0-rc.8",
     "nprogress": "^0.2.0",
     "pinia": "^2.1.7",
     "vue": "^3.3.10",
     "vue-i18n": "^9.8.0",
-    "vue-router": "^4.2.5"
+    "vue-router": "^4.2.5",
+    "vue3-colorpicker": "^2.2.3",
+    "vue3-toastify": "^0.2.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^18.4.3",

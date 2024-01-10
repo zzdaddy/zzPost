@@ -9,12 +9,13 @@ import {
   UI,
   Cursor,
 } from "leafer-ui";
-
+import "@leafer-in/editor";
 import {
   IEventListenerId,
   IFunction,
   ILeafer,
   IObject,
+  IScreenSizeData,
 } from "@leafer-ui/interface";
 import { isRef } from "vue";
 import BtnClearSVG from "~/assets/cursor-clear16.svg";
@@ -78,20 +79,11 @@ export class LeaferController {
       view: isRef(this.containerView)
         ? (this.containerView.value as string)
         : this.containerView,
-      //   wheel: {
-      //     zoomMode: stageConfig.zoom,
-      //   },
-      //   start: !!stageConfig.autoRender,
+      type: "draw", // 阻止默认的操作行为
+      ground: {},
+      editor: {},
     });
-    // 添加一个背景层
-    this.app.ground = new Leafer({
-      type: "draw",
-    });
-    this.app.add(this.app.ground);
-    Cursor.set("btn-clear", {
-      url: BtnClearSVG,
-    });
-    this.setStage(stageConfig);
+    this.listenResizeContainer();
   }
 
   getApp() {
@@ -110,6 +102,29 @@ export class LeaferController {
   // 在背景层插入图片
   importImageInGround() {}
 
+  listenResizeContainer() {
+    window.onresize = () => {
+      this.autoResizeApp();
+    };
+  }
+  autoResizeApp(size?: IScreenSizeData) {
+    let _size;
+    try {
+      let containerDom = isRef(this.containerView)
+        ? this.containerView.value
+        : this.containerView;
+      _size = (containerDom as HTMLBodyElement).getBoundingClientRect();
+    } catch (err) {
+      return;
+    }
+
+    if (size) _size = size;
+    this.app.resize({
+      width: _size.width,
+      height: _size.height,
+      pixelRatio: window.devicePixelRatio,
+    });
+  }
   // container 类型
   // fill模式下只支持容器事件
   setMouseMode(mode: MouseMode, container: StageContainer) {
@@ -204,16 +219,6 @@ export class LeaferController {
       this.onStartFillShape(container, this.fillConfig),
       this
     );
-  }
-  // 设置tree层, 先设置成固定的width/height, 方便导出, 导出还不支持, 先留着吧!
-  setStage(stageConfig?: StageConfig) {
-    // 添加中间层, 还有sky 和 ground 用到时再添加
-    // 默认操作都是基于tree
-    console.log(`stageConfig`, stageConfig);
-    this.app.tree = new Leafer({
-      //   start: !!stageConfig.autoRender,
-    });
-    this.app.add(this.app.tree);
   }
 
   // 添加图形, 统一入口, 会把图形收集起来

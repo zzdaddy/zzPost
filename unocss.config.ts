@@ -1,5 +1,11 @@
 import { presetDaisy } from "unocss-preset-daisy";
-import { presetAttributify, presetIcons, presetUno, transformerDirectives, transformerVariantGroup } from "unocss";
+import {
+  presetAttributify,
+  presetIcons,
+  presetUno,
+  transformerDirectives,
+  transformerVariantGroup,
+} from "unocss";
 import { defineConfig } from "unocss/vite";
 import presetChinese from "unocss-preset-chinese";
 import presetEase from "unocss-preset-ease";
@@ -14,11 +20,15 @@ export default defineConfig({
       scale: 1.5,
     }),
     presetDaisy({
-      themes: true,
+      themes: [
+        {
+          emerald: {
+            ...require("daisyui/src/theming/themes")["[data-theme=emerald]"],
+            primary: "#07C160",
+          },
+        },
+      ],
     }),
   ],
-  transformers: [
-    transformerDirectives(),
-    transformerVariantGroup(),
-  ],
+  transformers: [transformerDirectives(), transformerVariantGroup()],
 });

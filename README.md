@@ -1,5 +1,5 @@
 <div align='center'>
-<h1>Pixeled Pic Pro </h1>
+<h1>早早传书 </h1>
 <img src='README.assets/touxiang12.jpeg' alt='Boot-Vue - Opinionated Vite Starter Template' width='344'/>
 </div>
 
@@ -12,19 +12,7 @@
 [点击查看版本更新](https://github.com/zzdaddy/PixeledPicPro?tab=readme-ov-file#%E7%89%88%E6%9C%AC%E6%9B%B4%E6%96%B0) 或直接拉到最底部
 
 ## 最新功能
-- 基于Leafer(目前)
-- 生成自定义行x列的方格子
-- Toast组件
-- 鼠标模式:标准/填充  填充时可上色, 标准时可拖拽
-  - 按住空格键可拖拽
-  - 按住 Alt键+滚轮可缩放
-- `~`切换颜色
-- 导出图片
-- 无边框导出
-- 动态添加行和列
-- 预设功能
-  - 包含一组颜色和一个行列设置
-- 导入图片, 自动生成像素风格图片(优化中)
+- 生成3:4比例的文字分享图
 
 ### 功能预览(不一定是最新的，我可能懒得录 GIF)
 [在线体验最新版](https://zzstudio.cn/stall/pixeled-pic-pro/#/home)

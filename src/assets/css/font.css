@@ -1,0 +1,10 @@
+html,
+body,
+dev {
+  font-family: DouYinMeiHao, sans-serif;
+}
+
+@font-face {
+  font-family: DouYinMeiHao;
+  src: url("../fonts/douyinmeihao.otf");
+}

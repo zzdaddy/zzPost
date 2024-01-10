@@ -11,33 +11,7 @@ const { t } = useI18n();
 const mode = useColorMode<CustomTheme>({
   attribute: "data-theme",
   modes: {
-    cupcake: "cupcake",
     bumblebee: "bumblebee",
-    emerald: "emerald",
-    corporate: "corporate",
-    synthwave: "synthwave",
-    retro: "retro",
-    cyberpunk: "cyberpunk",
-    valentine: "valentine",
-    halloween: "halloween",
-    garden: "garden",
-    forest: "forest",
-    aqua: "aqua",
-    lofi: "lofi",
-    pastel: "pastel",
-    fantasy: "fantasy",
-    wireframe: "wireframe",
-    black: "black",
-    luxury: "luxury",
-    dracula: "dracula",
-    cmyk: "cmyk",
-    autumn: "autumn",
-    business: "business",
-    acid: "acid",
-    lemonade: "lemonade",
-    night: "night",
-    coffee: "coffee",
-    winter: "winter",
   },
 });
 
@@ -47,13 +21,15 @@ function changeTheme(event: MouseEvent, theme: CustomTheme) {
     // eslint-disable-next-line ts/ban-ts-comment
     // @ts-expect-error
     if (document.startViewTransition === undefined) {
-      throw new Error("document.startViewTransition is undefined, please update your browser to the latest version or use a modern browser.");
+      throw new Error(
+        "document.startViewTransition is undefined, please update your browser to the latest version or use a modern browser."
+      );
     }
     const x = event.clientX;
     const y = event.clientY;
     const endRadius = Math.hypot(
       Math.max(x, innerWidth - x),
-      Math.max(y, innerHeight - y),
+      Math.max(y, innerHeight - y)
     );
     // eslint-disable-next-line ts/ban-ts-comment
     // @ts-expect-error
@@ -73,13 +49,15 @@ function changeTheme(event: MouseEvent, theme: CustomTheme) {
           pseudoElement: isSameTheme
             ? "::view-transition-old(root)"
             : "::view-transition-new(root)",
-        },
+        }
       );
     });
   } catch (error: unknown) {
-    logger.error(`Failed to change theme : ${error instanceof Error ? error.message : ""}`);
+    logger.error(
+      `Failed to change theme : ${error instanceof Error ? error.message : ""}`
+    );
   } finally {
-    mode.value = theme;
+    mode.value = "bumblebee" || theme;
   }
 }
 </script>
@@ -107,7 +85,9 @@ function changeTheme(event: MouseEvent, theme: CustomTheme) {
             class="w-full cursor-pointer bg-base-100 text-base-content font-sans"
           >
             <div class="grid grid-cols-5 grid-rows-3">
-              <div class="col-span-5 row-span-3 row-start-1 flex gap-1 px-4 py-3">
+              <div
+                class="col-span-5 row-span-3 row-start-1 flex gap-1 px-4 py-3"
+              >
                 <div class="grow text-sm font-bold">
                   {{ theme.id }}
                 </div>
@@ -126,37 +106,37 @@ function changeTheme(event: MouseEvent, theme: CustomTheme) {
   </div>
 </template>
 
- <style scoped>
- .scrollbar::-webkit-scrollbar {
+<style scoped>
+.scrollbar::-webkit-scrollbar {
   width: 20px;
   height: 20px;
- }
+}
 
- .scrollbar::-webkit-scrollbar-track {
+.scrollbar::-webkit-scrollbar-track {
   border-radius: 100vh;
   background: #f7f4ed;
- }
+}
 
- .scrollbar::-webkit-scrollbar-thumb {
+.scrollbar::-webkit-scrollbar-thumb {
   background: #e0cbcb;
   border-radius: 100vh;
   border: 3px solid #f6f7ed;
- }
+}
 
- .scrollbar::-webkit-scrollbar-thumb:hover {
+.scrollbar::-webkit-scrollbar-thumb:hover {
   background: #c0a0b9;
- }
+}
 
- ::view-transition-old(root),
- ::view-transition-new(root) {
-   animation: none;
-   mix-blend-mode: normal;
- }
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
 
- ::view-transition-old(root) {
-   z-index: 999;
- }
- ::view-transition-new(root) {
-   z-index: 1;
- }
- </style>
+::view-transition-old(root) {
+  z-index: 999;
+}
+::view-transition-new(root) {
+  z-index: 1;
+}
+</style>

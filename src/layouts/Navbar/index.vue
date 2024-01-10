@@ -1,12 +1,26 @@
 <script setup lang="ts">
 // import ThemeChange from "./components/ThemeChange/index.vue";
 
-// import LocalesChange from "./components/LocalesChange/index.vue";
+import { getUserInfo } from "~/api/user";
+import LoginModal from "./components/LoginModal/index.vue";
 import UnoCSSIconButton from "~/components/Icon/UnoCSSIconButton.vue";
-
+import { Storage } from "~/config/Enum";
 defineOptions({
   name: "Navbar",
 });
+
+const userInfo = ref<string | null>(localStorage.getItem(Storage.USER_INFO));
+console.log(`userInfo`, userInfo.value);
+// 不会生效
+const username = computed(() => {
+  return userInfo.value === null ? "" : JSON.parse(userInfo.value).nickname;
+});
+
+const handleLoginSuccess = async () => {
+  const user = await getUserInfo();
+  localStorage.setItem(Storage.USER_INFO, JSON.stringify(user));
+  userInfo.value = JSON.stringify(user as object);
+};
 // @ts-expect-error
 const version = ref({ __APP_VERSION__ });
 </script>
@@ -24,17 +38,10 @@ const version = ref({ __APP_VERSION__ });
           class="px-2 btn btn-ghost"
         >
           <div
-            class="inline-flex text-lg text-primary transition-all duration-200 md:text-3xl"
+            class="inline-flex text-lg text-primary transition-all duration-200 md:text-xl"
           >
-            <span class="text-primary"
-              >P<span class="lowercase">ixeled</span></span
-            >
-            <span class="text-accent-content"
-              >P<span class="lowercase">ic</span></span
-            >
-            <span class="text-accent-content"
-              >P<span class="lowercase">ro</span></span
-            >
+            <span class="text-neutral">早早</span>
+            <span class="text-primary">传书</span>
             <sup
               ><em class="text-xs">Beta v{{ version.__APP_VERSION__ }}</em></sup
             >
@@ -44,9 +51,16 @@ const version = ref({ __APP_VERSION__ });
       <div>
         <!-- <ThemeChange /> -->
         <!-- <LocalesChange /> -->
-        <span id="busuanzi_container_site_pv"
-          >总访问量:<span id="busuanzi_value_site_pv">人</span></span
-        >
+        <!-- <span class="mr-2" id="busuanzi_container_site_pv"
+          ><span class="text-primary text-sm" id="busuanzi_value_site_pv"></span
+        ></span> -->
+        <!-- <button class="btn btn-outline btn-sm glass" v-if="!!!userInfo">
+          登录
+        </button> -->
+        <!-- <LoginModal v-if="!!!userInfo" @ok="handleLoginSuccess"></LoginModal>
+        <span class="btn btn-outline btn-sm glass" v-else>
+          {{ username }}
+        </span> -->
         <!-- <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span> -->
 
         <span

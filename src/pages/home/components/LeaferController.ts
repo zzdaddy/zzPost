@@ -79,6 +79,7 @@ export class LeaferController {
       view: isRef(this.containerView)
         ? (this.containerView.value as string)
         : this.containerView,
+      pixelRatio: 3,
       type: "draw", // 阻止默认的操作行为
       ground: {},
       editor: {},

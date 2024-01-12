@@ -7,11 +7,19 @@
       placeholder="输入文字"
     ></textarea>
     <div>
-      <color-picker format="rgb" v-model:pureColor="accentColor"></color-picker>
+      <color-picker
+        format="rgb"
+        v-model:pureColor="accentColor"
+        @pure-color-change="changeColor"
+      ></color-picker>
       <span class="text-16px" :style="{ color: accentColor }">强调色</span>
     </div>
     <div>
-      <color-picker format="rgb" v-model:pureColor="ignoreColor"></color-picker>
+      <color-picker
+        format="rgb"
+        v-model:pureColor="ignoreColor"
+        @pure-color-change="changeColor"
+      ></color-picker>
       <span class="text-16px" :style="{ color: ignoreColor }">忽略色</span>
     </div>
     <div
@@ -123,6 +131,9 @@ watch(uniqueTexts, (val) => {
   checkAndEmitHtmlText();
 });
 
+const changeColor = () => {
+  checkAndEmitHtmlText();
+};
 const checkAndEmitHtmlText = () => {
   // 原始文字
   const textArr = props.modelValue.split("");

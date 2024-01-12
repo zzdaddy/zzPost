@@ -122,8 +122,26 @@ const isChinese = (str: string) => {
   let re = /[^\u4e00-\u9fa5]/;
   return !re.test(str);
 };
+// 判断是不是大写字母
+const isUpperCase = (str: string) => {
+  let re = /^[A-Z]+$/;
+  return re.test(str);
+};
+//判断是不是小写字母
+const isLowerCase = (str: string) => {
+  let re = /^[a-z]+$/;
+  return re.test(str);
+};
+
 const formatTextSize = (text: string, baseSize: number) => {
-  return isChinese(text) ? baseSize : baseSize * 0.6;
+  if (isChinese(text)) {
+    return baseSize;
+  } else if (isUpperCase(text)) {
+    return baseSize * 0.7;
+  } else if (isLowerCase(text)) {
+    return baseSize * 0.6;
+  }
+  return baseSize;
 };
 const setCanvasContent = (customText?: any) => {
   if (!canvasContent.value || !shareContent.value) return;
@@ -169,8 +187,12 @@ const setCanvasContent = (customText?: any) => {
     let textCell = new Text({
       x,
       y,
+      width: formatTextSize(text, fontSize),
+      height: fontSize,
       fontSize,
       fontFamily,
+      textWrap: "none",
+      textAlign: "center",
       editable: false,
       fill: fontColor,
       text: text,
